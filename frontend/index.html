@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini Multi-Agent Debate Console</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1> Gemini Multi-Agent Debate Console</h1>
+            <p class="subtitle">Three AI agents collaborate to analyze your question from all angles</p>
+        </header>
+
+        <!-- Input Section -->
+        <section class="input-section">
+            <div class="input-container">
+                <label for="question-input">Enter Your Question or Proposition:</label>
+                <textarea 
+                    id="question-input" 
+                    placeholder="e.g., Should AI replace junior developers?"
+                    rows="4"
+                ></textarea>
+                <button id="debate-btn" class="primary-btn">
+                    <span class="btn-text">Start Debate</span>
+                    <span class="btn-loader" style="display: none;">
+                        <span class="spinner"></span> Thinking...
+                    </span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results-section" id="results-section" style="display: none;">
+            <h2>Debate Results</h2>
+            
+            <!-- Pro Agent Panel -->
+            <div class="agent-panel pro-panel">
+                <div class="panel-header">
+                    <span class="agent-icon">✅</span>
+                    <h3>Pro Agent</h3>
+                    <span class="agent-badge">Supporting</span>
+                </div>
+                <div class="panel-content" id="pro-content">
+                    <p class="placeholder">Waiting for debate...</p>
+                </div>
+            </div>
+
+            <!-- Con Agent Panel -->
+            <div class="agent-panel con-panel">
+                <div class="panel-header">
+                    <span class="agent-icon">❌</span>
+                    <h3>Con Agent</h3>
+                    <span class="agent-badge">Opposing</span>
+                </div>
+                <div class="panel-content" id="con-content">
+                    <p class="placeholder">Waiting for debate...</p>
+                </div>
+            </div>
+
+            <!-- Moderator Panel -->
+            <div class="agent-panel moderator-panel">
+                <div class="panel-header">
+                    <span class="agent-icon">⚖️</span>
+                    <h3>Moderator</h3>
+                    <span class="agent-badge">Synthesis</span>
+                </div>
+                <div class="panel-content" id="moderator-content">
+                    <p class="placeholder">Waiting for debate...</p>
+                </div>
+            </div>
+
+            <!-- Follow-up Section -->
+            <div class="followup-section">
+                <h3>Continue the Discussion</h3>
+                <div class="input-container">
+                    <textarea 
+                        id="followup-input" 
+                        placeholder="Ask a follow-up question or request clarification..."
+                        rows="3"
+                    ></textarea>
+                    <button id="followup-btn" class="secondary-btn">
+                        <span class="btn-text">Continue Debate</span>
+                        <span class="btn-loader" style="display: none;">
+                            <span class="spinner"></span> Thinking...
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Error Display -->
+        <div id="error-message" class="error-message" style="display: none;"></div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Powered by Gemini API • Multi-Agent Collaboration System</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
