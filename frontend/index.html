@@ -3,90 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gemini Multi-Agent Debate Console</title>
+    <title>Gemini Debate Arena</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <!-- Header -->
         <header class="header">
-            <h1> Gemini Multi-Agent Debate Console</h1>
-            <p class="subtitle">Three AI agents collaborate to analyze your question from all angles</p>
+            <h1>🎭 Gemini Debate Arena</h1>
+            <p class="subtitle">Watch AI agents battle it out in real-time!</p>
         </header>
 
-        <!-- Input Section -->
-        <section class="input-section">
-            <div class="input-container">
-                <label for="question-input">Enter Your Question or Proposition:</label>
+        <!-- Setup Section -->
+        <section class="setup-section" id="setup-section">
+            <div class="setup-card">
+                <h2>Start a New Debate</h2>
+                
+                <label for="question-input">Debate Topic:</label>
                 <textarea 
                     id="question-input" 
-                    placeholder="e.g., Should AI replace junior developers?"
-                    rows="4"
+                    placeholder="e.g., Should AI replace human artists?"
+                    rows="3"
                 ></textarea>
-                <button id="debate-btn" class="primary-btn">
-                    <span class="btn-text">Start Debate</span>
+                
+                <label for="rounds-input">Number of Rounds:</label>
+                <div class="rounds-selector">
+                    <button class="round-btn" data-rounds="1">1 Round</button>
+                    <button class="round-btn active" data-rounds="2">2 Rounds</button>
+                    <button class="round-btn" data-rounds="3">3 Rounds</button>
+                    <button class="round-btn" data-rounds="4">4 Rounds</button>
+                    <button class="round-btn" data-rounds="5">5 Rounds</button>
+                </div>
+                <p class="rounds-info">Selected: <span id="selected-rounds">2</span> rounds</p>
+                
+                <button id="start-debate-btn" class="primary-btn">
+                    <span class="btn-text">⚔️ Start Debate</span>
                     <span class="btn-loader" style="display: none;">
-                        <span class="spinner"></span> Thinking...
+                        <span class="spinner"></span> Starting...
                     </span>
                 </button>
             </div>
         </section>
 
-        <!-- Results Section -->
-        <section class="results-section" id="results-section" style="display: none;">
-            <h2>Debate Results</h2>
-            
-            <!-- Pro Agent Panel -->
-            <div class="agent-panel pro-panel">
-                <div class="panel-header">
-                    <span class="agent-icon">✅</span>
-                    <h3>Pro Agent</h3>
-                    <span class="agent-badge">Supporting</span>
-                </div>
-                <div class="panel-content" id="pro-content">
-                    <p class="placeholder">Waiting for debate...</p>
+        <!-- Debate Arena Section -->
+        <section class="arena-section" id="arena-section" style="display: none;">
+            <!-- Round Indicator -->
+            <div class="round-indicator">
+                <h2>Round <span id="current-round">1</span> of <span id="total-rounds">3</span></h2>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
                 </div>
             </div>
 
-            <!-- Con Agent Panel -->
-            <div class="agent-panel con-panel">
-                <div class="panel-header">
-                    <span class="agent-icon">❌</span>
-                    <h3>Con Agent</h3>
-                    <span class="agent-badge">Opposing</span>
+            <!-- Debate Stage -->
+            <div class="debate-stage">
+                <!-- Character Containers -->
+                <div class="character-container pro-character" id="pro-character" style="display: none;">
+                    <div class="character-avatar pro-avatar">
+                        <img src="pro_agent.png" alt="Pro Agent" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22150%22 height=%22150%22><circle cx=%2275%22 cy=%2275%22 r=%2270%22 fill=%22%2322c55e%22/><text x=%2275%22 y=%2285%22 font-size=%2250%22 text-anchor=%22middle%22 fill=%22white%22>PRO</text></svg>'">
+                    </div>
+                    <div class="speech-bubble pro-bubble">
+                        <p id="pro-speech"></p>
+                    </div>
                 </div>
-                <div class="panel-content" id="con-content">
-                    <p class="placeholder">Waiting for debate...</p>
+
+                <div class="character-container con-character" id="con-character" style="display: none;">
+                    <div class="character-avatar con-avatar">
+                        <img src="con_agent.png" alt="Con Agent" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22150%22 height=%22150%22><circle cx=%2275%22 cy=%2275%22 r=%2270%22 fill=%22%23ef4444%22/><text x=%2275%22 y=%2285%22 font-size=%2250%22 text-anchor=%22middle%22 fill=%22white%22>CON</text></svg>'">
+                    </div>
+                    <div class="speech-bubble con-bubble">
+                        <p id="con-speech"></p>
+                    </div>
+                </div>
+
+                <div class="character-container moderator-character" id="moderator-character" style="display: none;">
+                    <div class="character-avatar moderator-avatar">
+                        <img src="moderator_agent.png" alt="Moderator" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22150%22 height=%22150%22><circle cx=%2275%22 cy=%2275%22 r=%2270%22 fill=%22%23ffffff%22 stroke=%22%23d1af37%22 stroke-width=%225%22/><text x=%2275%22 y=%2285%22 font-size=%2240%22 text-anchor=%22middle%22 fill=%22%23d1af37%22>MOD</text></svg>'">
+                    </div>
+                    <div class="speech-bubble moderator-bubble">
+                        <p id="moderator-speech"></p>
+                    </div>
                 </div>
             </div>
 
-            <!-- Moderator Panel -->
-            <div class="agent-panel moderator-panel">
-                <div class="panel-header">
-                    <span class="agent-icon">⚖️</span>
-                    <h3>Moderator</h3>
-                    <span class="agent-badge">Synthesis</span>
-                </div>
-                <div class="panel-content" id="moderator-content">
-                    <p class="placeholder">Waiting for debate...</p>
+            <!-- Debate History -->
+            <div class="history-panel">
+                <h3>📜 Debate History</h3>
+                <div class="history-content" id="history-content">
+                    <!-- History items will be added here -->
                 </div>
             </div>
 
-            <!-- Follow-up Section -->
-            <div class="followup-section">
-                <h3>Continue the Discussion</h3>
-                <div class="input-container">
-                    <textarea 
-                        id="followup-input" 
-                        placeholder="Ask a follow-up question or request clarification..."
-                        rows="3"
-                    ></textarea>
-                    <button id="followup-btn" class="secondary-btn">
-                        <span class="btn-text">Continue Debate</span>
-                        <span class="btn-loader" style="display: none;">
-                            <span class="spinner"></span> Thinking...
-                        </span>
-                    </button>
+            <!-- User Interaction -->
+            <div class="user-interaction">
+                <button id="next-turn-btn" class="action-btn">
+                    <span class="btn-text">▶️ Next Turn</span>
+                    <span class="btn-loader" style="display: none;">
+                        <span class="spinner"></span> Waiting...
+                    </span>
+                </button>
+                
+                <button id="add-comment-btn" class="action-btn secondary">
+                    💬 Add Comment
+                </button>
+                
+                <button id="continue-debate-btn" class="action-btn primary" style="display: none;">
+                    ➕ Continue Debate
+                </button>
+                
+                <button id="new-debate-btn" class="action-btn secondary" style="display: none;">
+                    🔄 New Debate
+                </button>
+            </div>
+
+            <!-- Comment Modal -->
+            <div class="comment-modal" id="comment-modal" style="display: none;">
+                <div class="modal-content">
+                    <h3>Add Your Comment</h3>
+                    <textarea id="comment-input" rows="4" placeholder="Add clarification, follow-up question, or observation..."></textarea>
+                    <div class="modal-actions">
+                        <button id="submit-comment-btn" class="primary-btn">Submit</button>
+                        <button id="cancel-comment-btn" class="secondary-btn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Continue Debate Modal -->
+            <div class="comment-modal" id="continue-modal" style="display: none;">
+                <div class="modal-content">
+                    <h3>Continue the Debate</h3>
+                    <p class="modal-subtitle">How many additional rounds would you like?</p>
+                    
+                    <div class="rounds-selector">
+                        <button class="continue-round-btn" data-rounds="1">+1 Round</button>
+                        <button class="continue-round-btn active" data-rounds="2">+2 Rounds</button>
+                        <button class="continue-round-btn" data-rounds="3">+3 Rounds</button>
+                        <button class="continue-round-btn" data-rounds="5">+5 Rounds</button>
+                    </div>
+                    
+                    <p class="modal-subtitle" style="margin-top: 20px;">Would you like to add guidance for the next rounds?</p>
+                    <textarea id="continue-comment-input" rows="4" placeholder="Optional: Add direction, focus areas, or questions for the agents to consider..."></textarea>
+                    
+                    <div class="modal-actions">
+                        <button id="continue-with-comment-btn" class="primary-btn">Continue with Comment</button>
+                        <button id="continue-without-comment-btn" class="secondary-btn">Continue Without Comment</button>
+                        <button id="cancel-continue-btn" class="secondary-btn">Cancel</button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -96,7 +158,7 @@
 
         <!-- Footer -->
         <footer class="footer">
-            <p>Powered by Gemini API • Multi-Agent Collaboration System</p>
+            <p>Powered by Gemini API • Turn-Based Debate System v3.1</p>
         </footer>
     </div>
 

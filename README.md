@@ -1,117 +1,171 @@
-# 🤖 Gemini Multi-Agent Debate Console
+# 🎭 Gemini Multi-Agent Debate Arena
 
-A sophisticated web application that simulates structured debates using three specialized AI agents powered by Google's Gemini API.
+![Version](https://img.shields.io/badge/version-3.1-blue.svg)
+![Python](https://img.shields.io/badge/python-3.10+-green.svg)
+![License](https://img.shields.io/badge/license-MIT-orange.svg)
 
-## 🎯 Overview
+A dynamic web-based debate system where three AI agents (Pro, Con, Moderator) engage in structured debates on any topic using Google's Gemini API. Features turn-based rounds, animated character appearances, and real-time user interaction.
 
-The Gemini Multi-Agent Debate Console demonstrates agentic AI reasoning through role specialization and structured collaboration:
-
-- **Pro Agent** - Constructs compelling arguments in favor of any proposition
-- **Con Agent** - Develops strong counterarguments and identifies risks
-- **Moderator Agent** - Synthesizes both perspectives into balanced analysis
+![Debate Arena Demo](https://via.placeholder.com/800x400.png?text=Gemini+Debate+Arena)
 
 ## ✨ Features
 
-- 🎭 **Three Specialized AI Agents** - Each with distinct roles and reasoning patterns
-- 💬 **Multi-turn Conversations** - Session memory enables follow-up questions
-- 🎨 **Professional UI** - Clean, responsive interface with smooth animations
-- ⚡ **Real-time Processing** - Instant feedback with loading states
-- 🔄 **Session Management** - Maintains conversation context across exchanges
-- 🌐 **RESTful API** - Clean backend architecture for easy integration
+### 🤖 Three Specialized AI Agents
+- **Pro Agent**: Argues in favor of the proposition with supporting evidence
+- **Con Agent**: Challenges arguments with counterpoints and critiques
+- **Moderator**: Provides balanced synthesis and identifies key tensions
 
-## 🏗 Architecture
+### 🎬 Dynamic Presentation
+- **Animated Entrances**: Pro slides in from left, Con from right, Moderator from top
+- **Turn-Based Flow**: User-controlled progression through each argument
+- **Visual Progress**: Round indicator and progress bar tracking
+- **Smart Formatting**: Automatic bullet points for long responses, paragraphs for short ones
 
-```
-Browser (HTML/CSS/JS)
-        ↓ HTTP POST
-Python Backend (Flask)
-        ↓
-Agent Controller
- ├── Pro Agent (Gemini API)
- ├── Con Agent (Gemini API)
- └── Moderator Agent (Gemini API)
-        ↓
-Response JSON → Frontend Panels
-```
+### 💡 Enhanced User Experience
+- **Configurable Rounds**: Choose 1-5 debate rounds
+- **Mid-Debate Comments**: Add clarifications or questions anytime
+- **Continue Feature**: Extend debates with additional rounds
+- **Expandable History**: Click any history item to see full response
+- **Dynamic Sizing**: Speech bubbles adjust to content length
+- **Responsive Design**: Works on desktop, tablet, and mobile
 
-## 📁 Project Structure
+### 🚀 Performance Optimized
+- **Single API Call Per Round**: All three agents respond in one request
+- **Rate Limit Friendly**: Built-in delays and retry logic
+- **Session Memory**: Maintains conversation context across rounds
+- **Mock Mode**: Test without API calls
 
-```
-gemini_debate_console/
-│
-├── backend/
-│   ├── app.py                      # Flask server & routes
-│   ├── agents/
-│   │   ├── pro_agent.py           # Pro argument agent
-│   │   ├── con_agent.py           # Con argument agent
-│   │   └── moderator_agent.py     # Synthesis agent
-│   ├── prompts/
-│   │   ├── pro_prompt.txt         # Pro agent instructions
-│   │   ├── con_prompt.txt         # Con agent instructions
-│   │   └── moderator_prompt.txt   # Moderator instructions
-│   ├── utils/
-│   │   └── gemini_client.py       # Gemini API wrapper
-│   └── memory/
-│       └── session_store.py       # Conversation history
-│
-├── frontend/
-│   ├── index.html                 # Main UI
-│   ├── styles.css                 # Styling
-│   └── app.js                     # Frontend logic
-│
-├── .env                           # API key (create this)
-├── requirements.txt               # Python dependencies
-└── README.md                      # This file
-```
+## 📋 Table of Contents
 
-## 🚀 Quick Start
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [API Endpoints](#api-endpoints)
+- [Customization](#customization)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+- [License](#license)
 
-### Prerequisites
+## 🔧 Prerequisites
 
-- Python 3.10 or higher
-- Google Gemini API key ([Get one here](https://makersuite.google.com/app/apikey))
-- Modern web browser
+- **Python**: 3.10 or higher
+- **pip**: Python package manager
+- **Gemini API Key**: Get one free at [Google AI Studio](https://makersuite.google.com/app/apikey)
+- **Modern Browser**: Chrome, Firefox, Safari, or Edge
 
-### Installation
+### Rate Limits (Free Tier)
+- 15 requests per minute
+- 1500 requests per day
+- Each debate round = 1 API call (3 responses)
 
-1. **Clone or download the project**
+## 📦 Installation
+
+### 1. Clone the Repository
 
 ```bash
-cd gemini_debate_console
+git clone https://github.com/yourusername/gemini-debate-arena.git
+cd gemini-debate-arena
 ```
 
-2. **Set up Python environment**
+### 2. Create Project Structure
 
 ```bash
-# Create virtual environment (recommended)
-python -m venv venv
-
-# Activate virtual environment
-# On Windows:
-venv\Scripts\activate
-# On macOS/Linux:
-source venv/bin/activate
+# Create necessary directories
+mkdir -p backend/agents backend/memory backend/utils frontend
 ```
 
-3. **Install dependencies**
+### 3. Create Required Files
+
+Create empty `__init__.py` files to make directories Python packages:
+
+```bash
+touch backend/agents/__init__.py
+touch backend/memory/__init__.py
+touch backend/utils/__init__.py
+```
+
+### 4. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-4. **Configure API key**
+**requirements.txt:**
+```txt
+flask==3.0.0
+flask-cors==4.0.0
+google-generativeai==0.3.2
+python-dotenv==1.0.0
+```
+
+### 5. Set Up Environment Variables
 
 Create a `.env` file in the project root:
 
 ```bash
-GEMINI_API_KEY=your_actual_api_key_here
+echo "GEMINI_API_KEY=your_actual_api_key_here" > .env
 ```
 
-⚠️ **Important**: Replace `your_actual_api_key_here` with your real Gemini API key
+**Important**: Never commit `.env` to version control!
 
-### Running the Application
+### 6. Add to .gitignore
 
-1. **Start the backend server**
+Create or update `.gitignore`:
+
+```bash
+cat > .gitignore << 'EOF'
+# Environment
+.env
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+EOF
+```
+
+## ⚙️ Configuration
+
+### Get Your Gemini API Key
+
+1. Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
+2. Sign in with your Google account
+3. Click "Get API Key"
+4. Copy your key and add it to `.env`
+
+### Update API Base URL
+
+If running on a different port or host, update `frontend/app.js`:
+
+```javascript
+const API_BASE_URL = 'http://localhost:5000';  // Change port if needed
+```
+
+## 🚀 Usage
+
+### 1. Start the Backend Server
 
 ```bash
 python backend/app.py
@@ -119,227 +173,330 @@ python backend/app.py
 
 You should see:
 ```
-Gemini Multi-Agent Debate Console
+🎭 Gemini Multi-Agent Debate Console v3.1
 ============================================================
-API Key Status: ✓ Loaded
-Server starting on http://localhost:5000
-============================================================
+API Key: ✓ Loaded
+...
+Server: http://localhost:5000
 ```
 
-2. **Open the frontend**
+### 2. Open the Frontend
 
-Simply open `frontend/index.html` in your web browser, or navigate to:
+**Option A**: Direct file access
+```bash
+# Open in default browser
+open frontend/index.html  # macOS
+xdg-open frontend/index.html  # Linux
+start frontend/index.html  # Windows
 ```
-http://localhost:5000
+
+**Option B**: Serve via Flask (recommended)
+```bash
+# Frontend is automatically served at http://localhost:5000
+# Just navigate to http://localhost:5000 in your browser
 ```
 
-## 💡 Usage
+### 3. Start a Debate
 
-### Basic Debate Flow
+1. Enter a debate topic (e.g., "Should AI replace human artists?")
+2. Select number of rounds (1-5)
+3. Click "⚔️ Start Debate"
+4. Watch as Pro, Con, and Moderator present their arguments
+5. Click "▶️ Next Turn" to advance through each agent
+6. Add comments or continue the debate when complete
 
-1. **Enter a question or proposition** in the text area
-   - Example: "Should AI replace junior developers?"
-   - Example: "Is remote work better than office work?"
+## 📁 Project Structure
 
-2. **Click "Start Debate"** to initiate the discussion
+```
+gemini-debate-arena/
+│
+├── .env                          # API key (DO NOT COMMIT)
+├── .gitignore                    # Git ignore rules
+├── requirements.txt              # Python dependencies
+├── README.md                     # This file
+├── IMPROVEMENTS.md              # Version 3.1 changelog
+│
+├── backend/
+│   ├── app.py                   # Main Flask server
+│   │
+│   ├── agents/
+│   │   ├── __init__.py
+│   │   ├── pro_agent.py         # Pro argument generator
+│   │   ├── con_agent.py         # Con argument generator
+│   │   └── moderator_agent.py   # Moderator synthesis
+│   │
+│   ├── memory/
+│   │   ├── __init__.py
+│   │   └── session_store.py     # Conversation history
+│   │
+│   └── utils/
+│       ├── __init__.py
+│       └── gemini_client.py     # Gemini API wrapper
+│
+└── frontend/
+    ├── index.html               # Main UI
+    ├── styles.css               # Styling & animations
+    ├── app.js                   # Frontend logic
+    ├── pro_agent.png            # Optional: Pro avatar
+    ├── con_agent.png            # Optional: Con avatar
+    └── moderator_agent.png      # Optional: Moderator avatar
+```
 
-3. **Review the three perspectives:**
-   - ✅ **Pro Agent** presents arguments in favor
-   - ❌ **Con Agent** presents arguments against
-   - ⚖️ **Moderator** provides balanced synthesis
+## 🔌 API Endpoints
 
-4. **Ask follow-up questions** to dive deeper
-   - Example: "What about the ethical implications?"
-   - Example: "How does this affect small businesses?"
-
-### Example Questions
-
-- "Should we implement a 4-day work week?"
-- "Is nuclear energy the solution to climate change?"
-- "Should social media be regulated by governments?"
-- "Will quantum computing make current encryption obsolete?"
-- "Should we colonize Mars?"
-
-## 🔧 API Endpoints
-
-### POST `/debate`
-Initiate or continue a debate
+### POST `/debate/start`
+Start a new debate
 
 **Request:**
 ```json
 {
-  "question": "Should AI replace junior developers?",
-  "session_id": "session_123"
+    "question": "Should AI replace human artists?",
+    "session_id": "session_abc123",
+    "rounds": 3
 }
 ```
 
 **Response:**
 ```json
 {
-  "success": true,
-  "pro": "Pro agent's argument...",
-  "con": "Con agent's argument...",
-  "moderator": "Moderator's synthesis...",
-  "session_id": "session_123"
+    "success": true,
+    "round": 1,
+    "total_rounds": 3,
+    "responses": {
+        "pro": "Pro's argument...",
+        "con": "Con's argument...",
+        "moderator": "Moderator's synthesis..."
+    },
+    "session_id": "session_abc123"
+}
+```
+
+### POST `/debate/next-round`
+Get next round responses
+
+**Request:**
+```json
+{
+    "session_id": "session_abc123",
+    "current_round": 1,
+    "total_rounds": 3
+}
+```
+
+### POST `/debate/add-comment`
+Add user comment mid-debate
+
+**Request:**
+```json
+{
+    "session_id": "session_abc123",
+    "comment": "What about ethical concerns?"
 }
 ```
 
 ### GET `/history/<session_id>`
-Retrieve conversation history
+Retrieve debate history
 
 ### DELETE `/clear/<session_id>`
-Clear session history
+Clear session data
 
-### GET `/sessions`
-List all active sessions
+## 🎨 Customization
 
-## ⚙️ Configuration
+### Adjust Response Length
 
-### Changing the AI Model
-
-Edit `backend/utils/gemini_client.py`:
+Edit `backend/app.py` prompts:
 
 ```python
-# For faster responses (default):
-self.model_name = 'gemini-1.5-flash'
-
-# For more complex reasoning:
-self.model_name = 'gemini-1.5-pro'
+# Change word limits
+- Keep TOTAL response under 250 words  # Change to 150, 300, etc.
 ```
 
-### Adjusting Response Length
+### Change Animation Speed
 
-Edit agent files in `backend/agents/`:
+Edit `frontend/styles.css`:
 
-```python
-response = self.client.generate(
-    prompt=full_prompt,
-    max_tokens=500,  # Adjust this value
-    temperature=0.8   # Adjust randomness (0.0-1.0)
-)
+```css
+.pro-character.active {
+    animation: slideInFromLeft 0.6s ease-out;
+    /* Change 0.6s to 0.3s (faster) or 1s (slower) */
+}
 ```
 
-### Customizing Agent Behavior
+### Customize Colors
 
-Edit the prompt files in `backend/prompts/`:
-- `pro_prompt.txt` - Modify pro agent's reasoning style
-- `con_prompt.txt` - Modify con agent's reasoning style  
-- `moderator_prompt.txt` - Modify synthesis approach
+Edit `frontend/styles.css` color variables:
 
-## 🎨 Customizing the UI
+```css
+/* Pro: Green */
+#22c55e → your color
 
-The frontend styling can be customized in `frontend/styles.css`:
+/* Con: Red */
+#ef4444 → your color
 
-- **Colors**: Search for color values (e.g., `#D3AF37` for gold)
-- **Fonts**: Modify `font-family` properties
-- **Layout**: Adjust padding, margins, and flex properties
-- **Animations**: Edit keyframe animations at the bottom
+/* Moderator: Gold */
+#d1af37 → your color
+```
+
+### Add Custom Avatars
+
+Replace placeholder images in `frontend/`:
+- `pro_agent.png` (150x150px minimum)
+- `con_agent.png` (150x150px minimum)
+- `moderator_agent.png` (150x150px minimum)
 
 ## 🐛 Troubleshooting
 
-### "GEMINI_API_KEY not found"
-- Ensure `.env` file exists in project root
-- Verify the API key is correct
-- Check that `python-dotenv` is installed
+### Issue: "GEMINI_API_KEY not found"
+**Solution**: Create `.env` file in project root with valid API key
 
-### "Connection refused" errors
-- Verify backend server is running on port 5000
-- Check if another application is using port 5000
-- Try accessing http://localhost:5000 directly
+### Issue: Rate limit errors (429)
+**Solution**: 
+- Wait 60 seconds between tests
+- Free tier: 15 requests/minute
+- Consider upgrading to paid tier
 
-### CORS errors
+### Issue: Responses cut off mid-sentence
+**Solution**: Increase `max_tokens` in `backend/app.py` (currently 3000)
+
+### Issue: CORS errors
+**Solution**: 
 - Ensure `flask-cors` is installed
-- Check that `CORS(app)` is called in `app.py`
+- Check `CORS(app)` is called in `app.py`
 
-### Slow responses
-- Consider switching to `gemini-1.5-flash` for faster responses
-- Reduce `max_tokens` in agent files
-- Check your internet connection
+### Issue: Agents not responding to each other
+**Solution**: 
+- Verify using correct agent files from this repo
+- Restart server after changes
+- Clear browser cache (Ctrl+Shift+R)
 
-### API quota exceeded
-- Gemini API has rate limits
-- Wait a few minutes before retrying
-- Consider upgrading your API tier
+### Issue: Frontend can't connect to backend
+**Solution**:
+- Check backend is running on port 5000
+- Verify `API_BASE_URL` in `app.js` matches server
+- Check browser console for errors
 
-## 📊 Performance
+## 🔄 Git Commands Reference
 
-- **Average response time**: 3-8 seconds for complete debate
-- **Concurrent sessions**: Supports multiple simultaneous users
-- **Memory usage**: ~50-100MB for typical usage
-- **API calls per debate**: 3 calls (one per agent)
+### Initial Setup (First Time)
 
-## 🔒 Security Notes
-
-- Never commit your `.env` file with real API keys
-- Use environment variables in production
-- Consider rate limiting for public deployments
-- Sanitize user inputs before processing
-
-## 🚢 Deployment
-
-For production deployment:
-
-1. Use a production WSGI server (e.g., Gunicorn)
-2. Set up proper environment variables
-3. Enable HTTPS
-4. Configure rate limiting
-5. Add authentication if needed
-
-Example with Gunicorn:
 ```bash
-gunicorn -w 4 -b 0.0.0.0:5000 backend.app:app
+# Initialize git repository
+git init
+
+# Add all files
+git add .
+
+# First commit
+git commit -m "Initial commit: Gemini Debate Arena v3.1"
+
+# Link to GitHub repository
+git remote add origin https://github.com/yourusername/gemini-debate-arena.git
+
+# Push to GitHub
+git branch -M main
+git push -u origin main
 ```
 
-## 🛠 Tech Stack
+### Pushing to Existing Repository
 
-**Backend:**
-- Python 3.10+
-- Flask (web framework)
-- Google Generative AI SDK
-- python-dotenv (environment management)
+```bash
+# Check status
+git status
 
-**Frontend:**
-- HTML5
-- CSS3 (Flexbox, animations)
-- Vanilla JavaScript (ES6+)
-- Fetch API
+# Add modified files
+git add .
 
-**AI:**
-- Google Gemini 1.5 Flash/Pro
+# Commit changes
+git commit -m "Add improvements: dynamic sizing and expandable history"
 
-## 📝 License
+# Push to GitHub
+git push origin main
+```
 
-This project is provided as-is for educational and demonstration purposes.
+### Common Git Commands
+
+```bash
+# See what changed
+git status
+git diff
+
+# Add specific files
+git add backend/app.py
+git add frontend/styles.css
+
+# Commit with message
+git commit -m "Your descriptive message"
+
+# Push changes
+git push
+
+# Pull latest changes
+git pull
+
+# View commit history
+git log --oneline
+
+# Create a new branch
+git checkout -b feature/new-feature
+
+# Switch branches
+git checkout main
+```
+
+## 📊 Version History
+
+### v3.1 (Current - February 2026)
+- ✨ Smart formatting: automatic bullet points for long responses
+- 🔄 Dynamic speech bubble sizing
+- 📜 Expandable history items (click to see full text)
+- 🎯 Enforced word limits for conciseness
+- 🐛 Fixed overflow issues
+
+### v3.0 (January 2026)
+- 🚀 Single API call per round (3x fewer requests)
+- 🔄 Continue debate feature
+- 💬 Mid-debate comments
+- 📊 Better history tracking
+
+### v2.0 (January 2026)
+- 🎬 Turn-based debate system
+- ✨ Animated character appearances
+- 🗣️ Agents respond to each other
+- 🎮 User-controlled progression
+
+### v1.0 (Initial)
+- ⚙️ Basic three-agent system
+- 📝 Simple debate interface
+- 🔌 Gemini API integration
 
 ## 🤝 Contributing
 
-Contributions are welcome! Feel free to:
-- Report bugs
-- Suggest features
-- Submit pull requests
-- Improve documentation
+Contributions are welcome! Please follow these steps:
 
-## 📧 Support
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-For issues or questions:
-1. Check the troubleshooting section
-2. Review API documentation: https://ai.google.dev/docs
-3. Open an issue on the project repository
+### Development Guidelines
 
-## 🎓 Learning Resources
+- Follow PEP 8 for Python code
+- Use ES6+ for JavaScript
+- Comment complex logic
+- Test before submitting PR
+- Update README for new features
 
-- [Gemini API Documentation](https://ai.google.dev/docs)
-- [Flask Documentation](https://flask.palletsprojects.com/)
-- [Python asyncio Guide](https://docs.python.org/3/library/asyncio.html)
 
 ## 🙏 Acknowledgments
 
-- Google Gemini team for the powerful API
-- Flask community for the excellent web framework
-- All contributors and testers
+- **JumpStartNinjas LLP**: Providing resources, guidance, and development support
+- **Google Gemini API**: Powers the AI agents
+- **Flask**: Web framework
+- **Community Contributors**: Thanks to everyone who has contributed!
 
 ---
 
-**Built using Gemini API**
+**Made using Google Gemini**
 
-*Last updated: January 2026*
+*Last Updated: February 2026*
