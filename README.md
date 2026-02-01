@@ -2,7 +2,6 @@
 
 ![Version](https://img.shields.io/badge/version-3.1-blue.svg)
 ![Python](https://img.shields.io/badge/python-3.10+-green.svg)
-![License](https://img.shields.io/badge/license-MIT-orange.svg)
 
 A dynamic web-based debate system where three AI agents (Pro, Con, Moderator) engage in structured debates on any topic using Google's Gemini API. Features turn-based rounds, animated character appearances, and real-time user interaction.
 
