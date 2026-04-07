@@ -43,7 +43,7 @@ YOUR TASK:
 
 Provide a brief, insightful synthesis of this round:"""
             
-            print(f"\n⚖️  Moderator - Round {round_num} synthesis...")
+            print(f"\n️  Moderator - Round {round_num} synthesis...")
             
             response = self.client.generate(
                 prompt=prompt,
@@ -51,7 +51,7 @@ Provide a brief, insightful synthesis of this round:"""
                 temperature=0.7
             )
             
-            print(f"✅ Moderator: {len(response)} chars\n")
+            print(f" Moderator: {len(response)} chars\n")
             
             return response
         

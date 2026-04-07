@@ -11,7 +11,7 @@ class SessionStore:
     def __init__(self):
         """Initialize the session store with an empty storage dictionary"""
         self.sessions = {}
-        print("✓ Session Store initialized")
+        print(" Session Store initialized")
     
     def get_history(self, session_id: str) -> List[Dict]:
         """

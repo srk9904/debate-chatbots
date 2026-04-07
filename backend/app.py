@@ -58,13 +58,13 @@ def generate_all_responses(question, round_num, history):
 
 Generate responses for all three agents in this EXACT format:
 
-===PRO_AGENT===
+[PRO_AGENT]
 [Pro's response arguing FOR the proposition]
 
-===CON_AGENT===
+[CON_AGENT]
 [Con's response arguing AGAINST the proposition]
 
-===MODERATOR===
+[MODERATOR]
 [Moderator's balanced synthesis]
 
 INSTRUCTIONS FOR EACH AGENT:
@@ -113,13 +113,13 @@ CON previously argued:
 
 Generate responses for all three agents in this EXACT format:
 
-===PRO_AGENT===
+[PRO_AGENT]
 [Pro's response]
 
-===CON_AGENT===
+[CON_AGENT]
 [Con's response]
 
-===MODERATOR===
+[MODERATOR]
 [Moderator's synthesis]
 
 INSTRUCTIONS:
@@ -151,9 +151,9 @@ MODERATOR:
 
 Now generate all three responses:"""
     
-    print(f"\n{'='*60}")
-    print(f"🎯 Generating all agents for Round {round_num}...")
-    print(f"{'='*60}\n")
+    print(f"\n{'-'*60}")
+    print(f" Generating all agents for Round {round_num}...")
+    print(f"{'-'*60}\n")
     
     # Single API call for all three
     response = gemini_client.generate(
@@ -162,20 +162,20 @@ Now generate all three responses:"""
         temperature=0.8
     )
     
-    print(f"✅ Received combined response: {len(response)} chars\n")
+    print(f" Received combined response: {len(response)} chars\n")
     
     # Parse the response
     try:
         # Extract each agent's response using markers
-        pro_match = re.search(r'===PRO_AGENT===\s*(.*?)\s*===CON_AGENT===', response, re.DOTALL)
-        con_match = re.search(r'===CON_AGENT===\s*(.*?)\s*===MODERATOR===', response, re.DOTALL)
-        mod_match = re.search(r'===MODERATOR===\s*(.*?)$', response, re.DOTALL)
+        pro_match = re.search(r'\[PRO_AGENT\]\s*(.*?)\s*\[CON_AGENT\]', response, re.DOTALL)
+        con_match = re.search(r'\[CON_AGENT\]\s*(.*?)\s*\[MODERATOR\]', response, re.DOTALL)
+        mod_match = re.search(r'\[MODERATOR\]\s*(.*?)$', response, re.DOTALL)
         
         pro_response = pro_match.group(1).strip() if pro_match else "Error: Could not parse Pro response"
         con_response = con_match.group(1).strip() if con_match else "Error: Could not parse Con response"
         moderator_response = mod_match.group(1).strip() if mod_match else "Error: Could not parse Moderator response"
         
-        print(f"📊 Parsed responses:")
+        print(f" Parsed responses:")
         print(f"   Pro: {len(pro_response)} chars")
         print(f"   Con: {len(con_response)} chars")
         print(f"   Mod: {len(moderator_response)} chars\n")
@@ -187,7 +187,7 @@ Now generate all three responses:"""
         }
     
     except Exception as e:
-        print(f"❌ Error parsing response: {e}")
+        print(f" Error parsing response: {e}")
         return {
             'pro': f"Error parsing response: {e}",
             'con': f"Error parsing response: {e}",
@@ -212,11 +212,11 @@ def start_debate():
         session_store.clear_session(session_id)
         session_store.add_message(session_id, 'user', question)
         
-        print(f"\n{'='*60}")
-        print(f"🎭 NEW DEBATE STARTED")
+        print(f"\n{'-'*60}")
+        print(f" NEW DEBATE STARTED")
         print(f"Question: {question}")
         print(f"Total Rounds: {total_rounds}")
-        print(f"{'='*60}\n")
+        print(f"{'-'*60}\n")
         
         # Generate all Round 1 responses in one call
         responses = generate_all_responses(question, 1, [])
@@ -235,7 +235,7 @@ def start_debate():
         })
     
     except Exception as e:
-        print(f"\n❌ Error: {str(e)}\n")
+        print(f"\n Error: {str(e)}\n")
         return jsonify({'success': False, 'error': str(e)}), 500
 
 @app.route('/debate/next-round', methods=['POST'])
@@ -261,9 +261,9 @@ def next_round():
         history = session_store.get_history(session_id)
         question = history[0]['content'] if history else "No question"
         
-        print(f"\n{'='*60}")
-        print(f"🔄 Generating Round {next_round_num}")
-        print(f"{'='*60}\n")
+        print(f"\n{'-'*60}")
+        print(f" Generating Round {next_round_num}")
+        print(f"{'-'*60}\n")
         
         # Generate all responses for this round
         responses = generate_all_responses(question, next_round_num, history)
@@ -283,7 +283,7 @@ def next_round():
         })
     
     except Exception as e:
-        print(f"\n❌ Error: {str(e)}\n")
+        print(f"\n Error: {str(e)}\n")
         return jsonify({'success': False, 'error': str(e)}), 500
 
 @app.route('/debate/add-comment', methods=['POST'])
@@ -316,17 +316,17 @@ def clear_history(session_id):
     return jsonify({'success': True, 'message': f'Session {session_id} cleared'})
 
 if __name__ == '__main__':
-    print("\n" + "="*60)
-    print("🎭 Gemini Multi-Agent Debate Console v3.1")
-    print("="*60)
-    print(f"API Key: {'✓ Loaded' if GEMINI_API_KEY else '✗ Missing'}")
-    print("\n✨ NEW FEATURES:")
-    print("   • Single API call per round (3x fewer requests!)")
-    print("   • Smart formatting: bullets for long responses")
-    print("   • Better readability and concise arguments")
-    print("   • Agents respond directly to each other")
-    print("="*60)
+    print("\n" + "-"*60)
+    print(" Gemini Multi-Agent Debate Console v3.1")
+    print("-"*60)
+    print(f"API Key: {' Loaded' if GEMINI_API_KEY else ' Missing'}")
+    print("\n NEW FEATURES:")
+    print("   . Single API call per round (3x fewer requests!)")
+    print("   . Smart formatting: bullets for long responses")
+    print("   . Better readability and concise arguments")
+    print("   . Agents respond directly to each other")
+    print("-"*60)
     print("Server: http://localhost:5000")
-    print("="*60 + "\n")
+    print("-"*60 + "\n")
     
     app.run(host='0.0.0.0', port=5000, debug=True)

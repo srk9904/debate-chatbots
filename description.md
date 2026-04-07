@@ -1,6 +1,6 @@
-# 🎭 Gemini Multi-Agent Debate Console - Complete Project Documentation
+# Gemini Multi-Agent Debate Console - Complete Project Documentation
 
-## 📋 Project Overview
+## Project Overview
 
 **Name:** Gemini Multi-Agent Debate Console (Turn-Based Edition)
 
@@ -23,7 +23,7 @@
 
 ---
 
-## 📁 Complete Folder Structure
+## Complete Folder Structure
 
 ```
 gemini_debate_console/
@@ -65,7 +65,7 @@ gemini_debate_console/
 
 ---
 
-## 📄 File-by-File Documentation
+## File-by-File Documentation
 
 ### Root Files
 
@@ -509,7 +509,7 @@ function generateSessionId() {
 
 ---
 
-## 🔄 Debate Flow Diagram
+## Debate Flow Diagram
 
 ```
 User Input
@@ -547,7 +547,7 @@ Future agents see comment in context
 
 ---
 
-## ⚙️ Configuration & Customization
+## Configuration & Customization
 
 ### Change Number of Rounds
 **Frontend HTML:**
@@ -602,7 +602,7 @@ const API_BASE_URL = 'http://localhost:5001';
 
 ---
 
-## 🚀 Installation & Setup
+## Installation & Setup
 
 ### Prerequisites
 - Python 3.10 or higher
@@ -647,7 +647,7 @@ OR navigate to `http://localhost:5000`
 
 ---
 
-## 🐛 Common Issues & Solutions
+## Common Issues & Solutions
 
 ### Issue: "GEMINI_API_KEY not found"
 **Solution:** Create `.env` file in project root with valid API key
@@ -684,7 +684,7 @@ OR navigate to `http://localhost:5000`
 
 ---
 
-## 📊 API Endpoints Reference
+## API Endpoints Reference
 
 ### POST `/debate/start`
 **Request:**
@@ -792,7 +792,7 @@ OR navigate to `http://localhost:5000`
 
 ---
 
-## 🎨 Character Image Specifications
+## Character Image Specifications
 
 ### File Requirements
 - **Format:** PNG with transparent background
@@ -845,7 +845,7 @@ Holding scales or open palms. Transparent background, PNG, 512x512px.
 
 ---
 
-## 🔐 Security Considerations
+##  Security Considerations
 
 ### API Key Protection
 - Never commit `.env` to git
@@ -876,7 +876,7 @@ CORS(app, origins=['https://yourdomain.com'])
 
 ---
 
-## 📈 Performance Metrics
+##  Performance Metrics
 
 ### Response Times (Free Tier)
 - Pro/Con generation: 3-8 seconds
@@ -898,7 +898,7 @@ CORS(app, origins=['https://yourdomain.com'])
 
 ---
 
-## 🚀 Future Enhancement Ideas
+##  Future Enhancement Ideas
 
 ### Backend Enhancements
 1. PostgreSQL database for persistent history
@@ -930,7 +930,7 @@ CORS(app, origins=['https://yourdomain.com'])
 
 ---
 
-## 📝 Version History
+##  Version History
 
 **v2.0 (Current - Turn-Based Edition)**
 - Turn-based debate system
@@ -948,7 +948,7 @@ CORS(app, origins=['https://yourdomain.com'])
 
 ---
 
-## 🤝 Contributing Guidelines
+##  Contributing Guidelines
 
 ### Code Style
 - Python: PEP 8
@@ -985,7 +985,7 @@ CORS(app, origins=['https://yourdomain.com'])
 
 ---
 
-## 📚 Additional Resources
+##  Additional Resources
 
 ### Documentation
 - Gemini API: https://ai.google.dev/docs
@@ -1004,7 +1004,7 @@ CORS(app, origins=['https://yourdomain.com'])
 
 ---
 
-## 📞 Support & Contact
+##  Support & Contact
 
 For issues or questions:
 1. Check this documentation
@@ -1023,4 +1023,4 @@ For issues or questions:
 
 ---
 
-This documentation should contain everything needed to recreate, understand, and extend the project. Good luck with your migration! 🎭
+This documentation should contain everything needed to recreate, understand, and extend the project. Good luck with your migration! 

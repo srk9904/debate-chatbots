@@ -82,7 +82,7 @@ async function startDebate() {
     hideError();
     setLoadingState(startDebateBtn, true);
 
-    // ===== MOCK MODE =====
+    // MOCK MODE
     if (MOCK_MODE) {
         await new Promise(r => setTimeout(r, 400));
 
@@ -110,9 +110,9 @@ async function startDebate() {
         return;
     }
 
-    // ===== REAL BACKEND (SINGLE API CALL) =====
+    // REAL BACKEND (SINGLE API CALL)
     try {
-        console.log('🚀 Starting debate with single API call...');
+        console.log('Starting debate with single API call...');
         
         const response = await fetch(`${API_BASE_URL}/debate/start`, {
             method: 'POST',
@@ -127,7 +127,7 @@ async function startDebate() {
         if (!response.ok) throw new Error(`Server error: ${response.status}`);
         const data = await response.json();
 
-        console.log('✅ Received all responses:', {
+        console.log(' Received all responses:', {
             pro: data.responses.pro.length + ' chars',
             con: data.responses.con.length + ' chars',
             mod: data.responses.moderator.length + ' chars'
@@ -164,7 +164,7 @@ function showCurrentAgent() {
     const agentName = agentNames[currentAgentIndex];
     const content = currentRoundResponses[agentType];
     
-    console.log(`📢 Showing ${agentName}:`, content.substring(0, 100) + '...');
+    console.log(` Showing ${agentName}:`, content.substring(0, 100) + '...');
     
     showAgent(agentType, content);
     addToHistory(agentName, content, agentType);
@@ -179,7 +179,7 @@ async function showNextAgent() {
 
     currentAgentIndex++;
 
-    // ===== MOCK MODE =====
+    // MOCK MODE
     if (MOCK_MODE) {
         // Check if we've shown all three agents for this round
         if (currentAgentIndex > 2) {
@@ -212,7 +212,7 @@ async function showNextAgent() {
         return;
     }
 
-    // ===== REAL BACKEND =====
+    // REAL BACKEND
     // Check if we've shown all three agents for this round
     if (currentAgentIndex > 2) {
         // Round complete, check if we need another round
@@ -234,7 +234,7 @@ async function loadNextRound() {
     hideError();
 
     try {
-        console.log(`🔄 Loading Round ${currentRound + 1} with single API call...`);
+        console.log(` Loading Round ${currentRound + 1} with single API call...`);
         
         const response = await fetch(`${API_BASE_URL}/debate/next-round`, {
             method: 'POST',
@@ -254,7 +254,7 @@ async function loadNextRound() {
             return;
         }
 
-        console.log('✅ Received Round ' + data.round + ' responses');
+        console.log(' Received Round ' + data.round + ' responses');
 
         // Store new round responses
         currentRoundResponses = data.responses;
@@ -458,7 +458,7 @@ async function continueDebateRounds() {
 
     hideError();
     
-    console.log(`🔄 Continuing debate for ${additionalRounds} more rounds (total now: ${totalRounds})`);
+    console.log(` Continuing debate for ${additionalRounds} more rounds (total now: ${totalRounds})`);
 
     // Automatically load next round
     if (MOCK_MODE) {
@@ -490,7 +490,7 @@ function debateComplete() {
     newDebateBtn.style.display = 'block';
     continueDebateBtn.style.display = 'block'; // Show continue button
     
-    showError('🎉 Debate Complete! You can continue for more rounds or start a new debate.');
+    showError('Debate Complete! You can continue for more rounds or start a new debate.');
     setTimeout(() => hideError(), 8000);
 }
 
@@ -543,6 +543,6 @@ function hideError() {
     errorMessage.style.display = 'none';
 }
 
-console.log('🎭 Gemini Debate Arena v3.1 initialized (Improved Readability + Dynamic Sizing)');
+console.log('Gemini Debate Arena v3.1 initialized (Improved Readability + Dynamic Sizing)');
 console.log('Mock Mode:', MOCK_MODE ? 'ENABLED' : 'DISABLED');
 console.log('Session ID:', sessionId);

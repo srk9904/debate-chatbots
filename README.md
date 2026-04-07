@@ -1,4 +1,6 @@
-# 🎭 Gemini Multi-Agent Debate Arena
+# Gemini Multi-Agent Debate Arena
+
+**Proof of Concept**: This project demonstrates the capabilities of Google's Gemini API in a multi-agent environment, featuring structured turn-based debates between autonomous AI agents.
 
 ![Version](https://img.shields.io/badge/version-3.1-blue.svg)
 ![Python](https://img.shields.io/badge/python-3.10+-green.svg)
@@ -7,20 +9,20 @@ A dynamic web-based debate system where three AI agents (Pro, Con, Moderator) en
 
 ![Debate Arena Demo](https://via.placeholder.com/800x400.png?text=Gemini+Debate+Arena)
 
-## ✨ Features
+## Features
 
-### 🤖 Three Specialized AI Agents
+### Three Specialized AI Agents
 - **Pro Agent**: Argues in favor of the proposition with supporting evidence
 - **Con Agent**: Challenges arguments with counterpoints and critiques
 - **Moderator**: Provides balanced synthesis and identifies key tensions
 
-### 🎬 Dynamic Presentation
+### Dynamic Presentation
 - **Animated Entrances**: Pro slides in from left, Con from right, Moderator from top
 - **Turn-Based Flow**: User-controlled progression through each argument
 - **Visual Progress**: Round indicator and progress bar tracking
 - **Smart Formatting**: Automatic bullet points for long responses, paragraphs for short ones
 
-### 💡 Enhanced User Experience
+### Enhanced User Experience
 - **Configurable Rounds**: Choose 1-5 debate rounds
 - **Mid-Debate Comments**: Add clarifications or questions anytime
 - **Continue Feature**: Extend debates with additional rounds
@@ -28,13 +30,13 @@ A dynamic web-based debate system where three AI agents (Pro, Con, Moderator) en
 - **Dynamic Sizing**: Speech bubbles adjust to content length
 - **Responsive Design**: Works on desktop, tablet, and mobile
 
-### 🚀 Performance Optimized
+### Performance Optimized
 - **Single API Call Per Round**: All three agents respond in one request
 - **Rate Limit Friendly**: Built-in delays and retry logic
 - **Session Memory**: Maintains conversation context across rounds
 - **Mock Mode**: Test without API calls
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
@@ -47,7 +49,7 @@ A dynamic web-based debate system where three AI agents (Pro, Con, Moderator) en
 - [Contributing](#contributing)
 - [License](#license)
 
-## 🔧 Prerequisites
+## Prerequisites
 
 - **Python**: 3.10 or higher
 - **pip**: Python package manager
@@ -59,7 +61,7 @@ A dynamic web-based debate system where three AI agents (Pro, Con, Moderator) en
 - 1500 requests per day
 - Each debate round = 1 API call (3 responses)
 
-## 📦 Installation
+## Installation
 
 ### 1. Clone the Repository
 
@@ -145,7 +147,7 @@ Thumbs.db
 EOF
 ```
 
-## ⚙️ Configuration
+## Configuration
 
 ### Get Your Gemini API Key
 
@@ -162,7 +164,7 @@ If running on a different port or host, update `frontend/app.js`:
 const API_BASE_URL = 'http://localhost:5000';  // Change port if needed
 ```
 
-## 🚀 Usage
+## Usage
 
 ### 1. Start the Backend Server
 
@@ -172,9 +174,9 @@ python backend/app.py
 
 You should see:
 ```
-🎭 Gemini Multi-Agent Debate Console v3.1
-============================================================
-API Key: ✓ Loaded
+ Gemini Multi-Agent Debate Console v3.1
+---
+API Key:  Loaded
 ...
 Server: http://localhost:5000
 ```
@@ -199,12 +201,12 @@ start frontend/index.html  # Windows
 
 1. Enter a debate topic (e.g., "Should AI replace human artists?")
 2. Select number of rounds (1-5)
-3. Click "⚔️ Start Debate"
+3. Click "️ Start Debate"
 4. Watch as Pro, Con, and Moderator present their arguments
-5. Click "▶️ Next Turn" to advance through each agent
+5. Click "Next Turn" to advance through each agent
 6. Add comments or continue the debate when complete
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 gemini-debate-arena/
@@ -241,7 +243,7 @@ gemini-debate-arena/
     └── moderator_agent.png      # Optional: Moderator avatar
 ```
 
-## 🔌 API Endpoints
+## API Endpoints
 
 ### POST `/debate/start`
 Start a new debate
@@ -299,7 +301,7 @@ Retrieve debate history
 ### DELETE `/clear/<session_id>`
 Clear session data
 
-## 🎨 Customization
+## Customization
 
 ### Adjust Response Length
 
@@ -327,13 +329,13 @@ Edit `frontend/styles.css` color variables:
 
 ```css
 /* Pro: Green */
-#22c55e → your color
+#22c55e -> your color
 
 /* Con: Red */
-#ef4444 → your color
+#ef4444 -> your color
 
 /* Moderator: Gold */
-#d1af37 → your color
+#d1af37 -> your color
 ```
 
 ### Add Custom Avatars
@@ -343,7 +345,7 @@ Replace placeholder images in `frontend/`:
 - `con_agent.png` (150x150px minimum)
 - `moderator_agent.png` (150x150px minimum)
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Issue: "GEMINI_API_KEY not found"
 **Solution**: Create `.env` file in project root with valid API key
@@ -374,7 +376,7 @@ Replace placeholder images in `frontend/`:
 - Verify `API_BASE_URL` in `app.js` matches server
 - Check browser console for errors
 
-## 🔄 Git Commands Reference
+## Git Commands Reference
 
 ### Initial Setup (First Time)
 
@@ -442,33 +444,33 @@ git checkout -b feature/new-feature
 git checkout main
 ```
 
-## 📊 Version History
+## Version History
 
 ### v3.1 (Current - February 2026)
-- ✨ Smart formatting: automatic bullet points for long responses
-- 🔄 Dynamic speech bubble sizing
-- 📜 Expandable history items (click to see full text)
-- 🎯 Enforced word limits for conciseness
-- 🐛 Fixed overflow issues
+-  Smart formatting: automatic bullet points for long responses
+-  Dynamic speech bubble sizing
+-  Expandable history items (click to see full text)
+-  Enforced word limits for conciseness
+-  Fixed overflow issues
 
 ### v3.0 (January 2026)
-- 🚀 Single API call per round (3x fewer requests)
-- 🔄 Continue debate feature
-- 💬 Mid-debate comments
-- 📊 Better history tracking
+-  Single API call per round (3x fewer requests)
+-  Continue debate feature
+-  Mid-debate comments
+-  Better history tracking
 
 ### v2.0 (January 2026)
-- 🎬 Turn-based debate system
-- ✨ Animated character appearances
-- 🗣️ Agents respond to each other
-- 🎮 User-controlled progression
+-  Turn-based debate system
+-  Animated character appearances
+- Agents respond to each other
+-  User-controlled progression
 
 ### v1.0 (Initial)
-- ⚙️ Basic three-agent system
-- 📝 Simple debate interface
-- 🔌 Gemini API integration
+- Basic three-agent system
+-  Simple debate interface
+-  Gemini API integration
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please follow these steps:
 
@@ -487,7 +489,7 @@ Contributions are welcome! Please follow these steps:
 - Update README for new features
 
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **JumpStartNinjas LLP**: Providing resources, guidance, and development support
 - **Google Gemini API**: Powers the AI agents

@@ -54,7 +54,7 @@ YOUR TASK:
 
 Make a strong opening argument:"""
             
-            print(f"\n🔴 Con Agent - Generating response...")
+            print(f"\n Con Agent - Generating response...")
             
             response = self.client.generate(
                 prompt=prompt,
@@ -62,7 +62,7 @@ Make a strong opening argument:"""
                 temperature=0.8
             )
             
-            print(f"✅ Con: {len(response)} chars\n")
+            print(f" Con: {len(response)} chars\n")
             
             return response
         

@@ -40,10 +40,10 @@ class GeminiClient:
             try:
                 self.model = genai.GenerativeModel(model_name)
                 self.model_name = model_name
-                print(f"✓ Gemini Client initialized with model: {self.model_name}")
+                print(f"Gemini Client initialized with model: {self.model_name}")
                 break
             except Exception as e:
-                print(f"  Trying {model_name}... failed: {str(e)[:80]}")
+                print(f"Trying {model_name}... failed: {str(e)[:80]}")
                 continue
         
         if not self.model:
@@ -51,7 +51,7 @@ class GeminiClient:
             try:
                 self.model_name = 'models/gemini-2.5-flash'
                 self.model = genai.GenerativeModel(self.model_name)
-                print(f"✓ Gemini Client initialized with model: {self.model_name} (fallback)")
+                print(f"Gemini Client initialized with model: {self.model_name} (fallback)")
             except Exception as e:
                 raise ValueError(
                     "Could not initialize Gemini model. "
@@ -115,19 +115,19 @@ class GeminiClient:
                     retry_match = re.search(r'retry in (\d+\.?\d*)', error_str)
                     if retry_match:
                         retry_seconds = float(retry_match.group(1))
-                        print(f"⚠️  Rate limit hit. Waiting {retry_seconds:.1f}s before retry {attempt + 1}/{max_retries}...")
+                        print(f"Rate limit hit. Waiting {retry_seconds:.1f}s before retry {attempt + 1}/{max_retries}...")
                         time.sleep(retry_seconds + 1)  # Add 1 second buffer
                         continue
                     else:
                         # Default wait time for rate limits
                         wait_time = 20 * (attempt + 1)  # Exponential backoff
-                        print(f"⚠️  Rate limit hit. Waiting {wait_time}s before retry {attempt + 1}/{max_retries}...")
+                        print(f"Rate limit hit. Waiting {wait_time}s before retry {attempt + 1}/{max_retries}...")
                         time.sleep(wait_time)
                         continue
                 else:
                     # Not a rate limit error, raise immediately
                     error_msg = f"Gemini API Error: {error_str}"
-                    print(f"❌ {error_msg}")
+                    print(f"{error_msg}")
                     raise Exception(error_msg)
         
         # If we exhausted all retries
